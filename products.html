@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제품 - Luxe Perfume</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+        
+        .page-title {
+            text-align: center;
+            padding: 3rem 0;
+            background: white;
+            margin-bottom: 2rem;
+        }
+        
+        .page-title h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        
+        .filters {
+            max-width: 1200px;
+            margin: 0 auto 2rem;
+            padding: 0 2rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        .products-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #999;
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+        }
+        
+        .product-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        
+        .product-description {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 1rem;
+        }
+        
+        .buy-button {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s;
+        }
+        
+        .buy-button:hover {
+            background: linear-gradient(45deg, #5a6fd8, #6a4190);
+        }
+        
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+        
+        @media (max-width: 768px) {
+            .nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .filters {
+                justify-content: center;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">Luxe Perfume</div>
+            <ul class="nav-links">
+                <li><a href="index.html">홈</a></li>
+                <li><a href="products.html">제품</a></li>
+                <li><a href="about.html">회사소개</a></li>
+                <li><a href="contact.html">고객센터</a></li>
+                <li><a href="cart.html">장바구니</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-title">
+        <h1>모든 제품</h1>
+        <p>다양한 향수들을 만나보세요</p>
+    </div>
+
+    <div class="filters">
+        <button class="filter-btn active" onclick="filterProducts('all')">전체</button>
+        <button class="filter-btn" onclick="filterProducts('floral')">플로럴</button>
+        <button class="filter-btn" onclick="filterProducts('woody')">우디</button>
+        <button class="filter-btn" onclick="filterProducts('fresh')">프레시</button>
+        <button class="filter-btn" onclick="filterProducts('oriental')">오리엔탈</button>
+    </div>
+
+    <div class="products-container">
+        <div class="products-grid" id="productsGrid">
+            <div class="product-card" data-category="floral">
+                <div class="product-image">🌸</div>
+                <div class="product-info">
+                    <h3 class="product-name">로즈 파라다이스</h3>
+                    <p class="product-description">신비로운 장미 향과 우드 노트의 조화</p>
+                    <div class="product-price">₩180,000</div>
+                    <button class="buy-button" onclick="addToCart('로즈 파라다이스', 180000)">장바구니 담기</button>
+                </div>
+            </div>
+            
+            <div class="product-card" data-category="fresh">
+                <div class="product-image">🌊</div>
+                <div class="product-info">
+                    <h3 class="product-name">오션 미스터리</h3>
+                    <p class="product-description">깊은 바다의 신선함과 시트러스의 상쾌함</p>
+                    <div class="product-price">₩220,000</div>
+                    <button class="buy-button" onclick="addToCart('오션 미스터리', 220000)">장바구니 담기</button>
+                </div>
+            </div>
+            
+            <div class="product-card" data-category="woody">
+                <div class="product-image">🌙</div>
+                <div class="product-info">
+                    <h3 class="product-name">미드나잇 스타</h3>
+                    <p class="product-description">밤하늘의 신비로움을 담은 우디 향</p>
+                    <div class="product-price">₩250,000</div>
+                    <button class="buy-button" onclick="addToCart('미드나잇 스타', 250000)">장바구니 담기</button>
+                </div>
+            </div>
+            
+            <div class="product-card" data-category="fresh">
+                <div class="product-image">🍃</div>
+                <div class="product-info">
+                    <h3 class="product-name">그린 가든</h3>
+                    <p class="product-description">신선한 허브와 꽃의 자연스러운 향</p>
+                    <div class="product-price">₩160,000</div>
+                    <button class="buy-button" onclick="addToCart('그린 가든', 160000)">장바구니 담기</button>
+                </div>
+            </div>
+            
+            <div class="product-card" data-category="oriental">
+                <div class="product-image">🌹</div>
+                <div class="product-info">
+                    <h3 class="product-name">벨벳 로즈</h3>
+                    <p class="product-description">고급스러운 벨벳과 장미의 조화</p>
+                    <div class="product-price">₩280,000</div>
+                    <button class="buy-button" onclick="addToCart('벨벳 로즈', 280000)">장바구니 담기</button>
+                </div>
+            </div>
+            
+            <div class="product-card" data-category="woody">
+                <div class="product-image">🌲</div>
+                <div class="product-info">
+                    <h3 class="product-name">포레스트 드림</h3>
+                    <p class="product-description">깊은 숲의 신선한 향과 우드 노트</p>
+                    <div class="product-price">₩200,000</div>
+                    <button class="buy-button" onclick="addToCart('포레스트 드림', 200000)">장바구니 담기</button>
+                </div>
+            </div>
+            
+            <div class="product-card" data-category="floral">
+                <div class="product-image">🌺</div>
+                <div class="product-info">
+                    <h3 class="product-name">라벤더 필드</h3>
+                    <p class="product-description">평화로운 라벤더 향과 허브 노트</p>
+                    <div class="product-price">₩170,000</div>
+                    <button class="buy-button" onclick="addToCart('라벤더 필드', 170000)">장바구니 담기</button>
+                </div>
+            </div>
+            
+            <div class="product-card" data-category="oriental">
+                <div class="product-image">✨</div>
+                <div class="product-info">
+                    <h3 class="product-name">골든 스파이스</h3>
+                    <p class="product-description">고급스러운 스파이스와 바닐라의 조화</p>
+                    <div class="product-price">₩320,000</div>
+                    <button class="buy-button" onclick="addToCart('골든 스파이스', 320000)">장바구니 담기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Luxe Perfume. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function addToCart(productName, price) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push({ name: productName, price: price });
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(`${productName}이(가) 장바구니에 추가되었습니다!`);
+        }
+        
+        function filterProducts(category) {
+            const products = document.querySelectorAll('.product-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            // 버튼 활성화 상태 변경
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // 제품 필터링
+            products.forEach(product => {
+                if (category === 'all' || product.dataset.category === category) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html> 

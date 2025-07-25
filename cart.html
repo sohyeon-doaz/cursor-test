@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>장바구니 - Luxe Perfume</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+        
+        .page-title {
+            text-align: center;
+            padding: 3rem 0;
+            background: white;
+            margin-bottom: 2rem;
+        }
+        
+        .page-title h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        
+        .cart-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .cart-empty {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .cart-empty h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        
+        .cart-empty p {
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        
+        .continue-shopping {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+        
+        .continue-shopping:hover {
+            transform: translateY(-2px);
+        }
+        
+        .cart-items {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+        
+        .cart-header {
+            background: #f8f9fa;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #e0e0e0;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .cart-item {
+            display: grid;
+            grid-template-columns: 100px 2fr 1fr 1fr 100px;
+            gap: 1rem;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        
+        .item-image {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #999;
+        }
+        
+        .item-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        
+        .item-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .item-price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .quantity-btn:hover {
+            background: #f0f0f0;
+        }
+        
+        .quantity-input {
+            width: 50px;
+            height: 30px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        .remove-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .remove-btn:hover {
+            background: #c0392b;
+        }
+        
+        .cart-summary {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 2rem;
+        }
+        
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .summary-item:last-child {
+            border-bottom: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #333;
+        }
+        
+        .checkout-btn {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 2rem;
+            transition: transform 0.3s;
+        }
+        
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+        
+        @media (max-width: 768px) {
+            .nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .cart-item {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .item-image {
+                margin: 0 auto;
+            }
+            
+            .quantity-controls {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">Luxe Perfume</div>
+            <ul class="nav-links">
+                <li><a href="index.html">홈</a></li>
+                <li><a href="products.html">제품</a></li>
+                <li><a href="about.html">회사소개</a></li>
+                <li><a href="contact.html">고객센터</a></li>
+                <li><a href="cart.html">장바구니</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-title">
+        <h1>장바구니</h1>
+        <p>선택하신 제품들을 확인해보세요</p>
+    </div>
+
+    <div class="cart-container">
+        <div id="cartContent">
+            <!-- 장바구니 내용이 여기에 동적으로 로드됩니다 -->
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Luxe Perfume. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function loadCart() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartContent = document.getElementById('cartContent');
+            
+            if (cart.length === 0) {
+                cartContent.innerHTML = `
+                    <div class="cart-empty">
+                        <h2>장바구니가 비어있습니다</h2>
+                        <p>원하는 향수를 선택하여 장바구니에 담아보세요.</p>
+                        <a href="products.html" class="continue-shopping">쇼핑 계속하기</a>
+                    </div>
+                `;
+                return;
+            }
+            
+            let cartHTML = `
+                <div class="cart-items">
+                    <div class="cart-header">
+                        <div style="display: grid; grid-template-columns: 100px 2fr 1fr 1fr 100px; gap: 1rem;">
+                            <span>이미지</span>
+                            <span>제품명</span>
+                            <span>가격</span>
+                            <span>수량</span>
+                            <span>삭제</span>
+                        </div>
+                    </div>
+            `;
+            
+            let total = 0;
+            
+            cart.forEach((item, index) => {
+                total += item.price;
+                cartHTML += `
+                    <div class="cart-item">
+                        <div class="item-image">🌸</div>
+                        <div class="item-info">
+                            <h3>${item.name}</h3>
+                            <p>프리미엄 향수</p>
+                        </div>
+                        <div class="item-price">₩${item.price.toLocaleString()}</div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn" onclick="updateQuantity(${index}, -1)">-</button>
+                            <input type="number" class="quantity-input" value="1" min="1" onchange="updateQuantityInput(${index}, this.value)">
+                            <button class="quantity-btn" onclick="updateQuantity(${index}, 1)">+</button>
+                        </div>
+                        <button class="remove-btn" onclick="removeItem(${index})">삭제</button>
+                    </div>
+                `;
+            });
+            
+            cartHTML += `</div>`;
+            
+            // 장바구니 요약
+            cartHTML += `
+                <div class="cart-summary">
+                    <div class="summary-item">
+                        <span>상품 금액</span>
+                        <span>₩${total.toLocaleString()}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>배송비</span>
+                        <span>₩3,000</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>총 결제 금액</span>
+                        <span>₩${(total + 3000).toLocaleString()}</span>
+                    </div>
+                    <button class="checkout-btn" onclick="checkout()">주문하기</button>
+                </div>
+            `;
+            
+            cartContent.innerHTML = cartHTML;
+        }
+        
+        function updateQuantity(index, change) {
+            // 실제로는 수량 변경 로직을 구현해야 합니다
+            alert('수량 변경 기능은 개발 중입니다.');
+        }
+        
+        function updateQuantityInput(index, value) {
+            // 실제로는 수량 입력 변경 로직을 구현해야 합니다
+            alert('수량 변경 기능은 개발 중입니다.');
+        }
+        
+        function removeItem(index) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            loadCart();
+        }
+        
+        function checkout() {
+            alert('주문 기능은 개발 중입니다. 실제 쇼핑몰에서는 결제 시스템과 연동됩니다.');
+        }
+        
+        // 페이지 로드 시 장바구니 표시
+        window.onload = loadCart;
+    </script>
+</body>
+</html> 
