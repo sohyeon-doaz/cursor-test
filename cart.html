@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>장바구니 - Luxe Perfume</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,18 +15,21 @@
         }
         
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f8f9fa;
+            font-family: 'Gowun Batang', serif;
+            background-color: #ffffff;
+            color: #1d1d1f;
             line-height: 1.6;
         }
         
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: rgba(255, 255, 255, 0.98);
+            color: #1d1d1f;
             padding: 1rem 0;
             position: sticky;
             top: 0;
             z-index: 1000;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid #e5e5e7;
         }
         
         .nav {
@@ -36,8 +42,9 @@
         }
         
         .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #1d1d1f;
         }
         
         .nav-links {
@@ -47,14 +54,14 @@
         }
         
         .nav-links a {
-            color: white;
+            color: #1d1d1f;
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s;
         }
         
         .nav-links a:hover {
-            color: #ffd700;
+            color: #007aff;
         }
         
         .page-title {
@@ -206,7 +213,7 @@
             color: white;
             border: none;
             padding: 0.5rem;
-            border-radius: 5px;
+            border-radius: 980px;
             cursor: pointer;
             font-size: 0.9rem;
         }
@@ -238,28 +245,31 @@
         }
         
         .checkout-btn {
-            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            background: #1d1d1f;
             color: white;
             padding: 1rem 2rem;
             border: none;
-            border-radius: 25px;
+            border-radius: 980px;
             font-size: 1.2rem;
             cursor: pointer;
             width: 100%;
             margin-top: 2rem;
-            transition: transform 0.3s;
+            transition: all 0.3s;
+            font-weight: 500;
         }
         
         .checkout-btn:hover {
-            transform: translateY(-2px);
+            background: #424245;
+            transform: scale(1.02);
         }
         
         .footer {
-            background: #2c3e50;
-            color: white;
+            background: #f5f5f7;
+            color: #86868b;
             text-align: center;
             padding: 2rem;
             margin-top: 4rem;
+            border-top: 1px solid #e5e5e7;
         }
         
         @media (max-width: 768px) {
@@ -291,7 +301,7 @@
 <body>
     <header class="header">
         <nav class="nav">
-            <div class="logo">Luxe Perfume</div>
+            <div class="logo">PERFUME</div>
             <ul class="nav-links">
                 <li><a href="index.html">홈</a></li>
                 <li><a href="products.html">제품</a></li>

@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luxe Perfume - 프리미엄 향수 쇼핑몰</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,17 +15,20 @@
         }
         
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f8f9fa;
+            font-family: 'Gowun Batang', serif;
+            background-color: #ffffff;
+            color: #1d1d1f;
         }
         
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: rgba(255, 255, 255, 0.98);
+            color: #1d1d1f;
             padding: 1rem 0;
             position: sticky;
             top: 0;
             z-index: 1000;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid #e5e5e7;
         }
         
         .nav {
@@ -35,8 +41,9 @@
         }
         
         .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #1d1d1f;
         }
         
         .nav-links {
@@ -46,21 +53,19 @@
         }
         
         .nav-links a {
-            color: white;
+            color: #1d1d1f;
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s;
         }
         
         .nav-links a:hover {
-            color: #ffd700;
+            color: #007aff;
         }
         
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 60vh;
+            background: #1d1d1f;
+            height: 50vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -69,28 +74,34 @@
         }
         
         .hero-content h1 {
-            font-size: 3rem;
+            font-size: 4rem;
+            font-weight: 400;
             margin-bottom: 1rem;
+            letter-spacing: -0.02em;
         }
         
         .hero-content p {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             margin-bottom: 2rem;
+            color: #f5f5f7;
+            font-weight: 400;
         }
         
         .cta-button {
-            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
-            color: white;
+            background: white;
+            color: #1d1d1f;
             padding: 1rem 2rem;
             border: none;
-            border-radius: 50px;
+            border-radius: 980px;
             font-size: 1.1rem;
             cursor: pointer;
-            transition: transform 0.3s;
+            transition: all 0.3s;
+            font-weight: 500;
         }
         
         .cta-button:hover {
-            transform: translateY(-2px);
+            background: #f5f5f7;
+            transform: scale(1.02);
         }
         
         .products-section {
@@ -101,9 +112,11 @@
         
         .section-title {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 3rem;
+            font-weight: 600;
             margin-bottom: 3rem;
-            color: #333;
+            color: #1d1d1f;
+            letter-spacing: -0.02em;
         }
         
         .products-grid {
@@ -114,25 +127,27 @@
         
         .product-card {
             background: white;
-            border-radius: 15px;
+            border-radius: 18px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border: 1px solid #d1d1d6;
         }
         
         .product-card:hover {
-            transform: translateY(-5px);
+            transform: scale(1.02);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
         }
         
         .product-image {
             width: 100%;
             height: 250px;
-            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+            background: white;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 3rem;
-            color: #999;
+            color: #86868b;
         }
         
         .product-info {
@@ -140,46 +155,50 @@
         }
         
         .product-name {
-            font-size: 1.2rem;
-            font-weight: bold;
+            font-size: 1.3rem;
+            font-weight: 600;
             margin-bottom: 0.5rem;
-            color: #333;
+            color: #1d1d1f;
         }
         
         .product-description {
-            color: #666;
+            color: #86868b;
             margin-bottom: 1rem;
             line-height: 1.5;
+            font-size: 0.95rem;
         }
         
         .product-price {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: #e74c3c;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #1d1d1f;
             margin-bottom: 1rem;
         }
         
         .buy-button {
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            background: #1d1d1f;
             color: white;
             padding: 0.8rem 1.5rem;
             border: none;
-            border-radius: 25px;
+            border-radius: 980px;
             cursor: pointer;
             width: 100%;
-            transition: background 0.3s;
+            transition: all 0.3s;
+            font-weight: 500;
         }
         
         .buy-button:hover {
-            background: linear-gradient(45deg, #5a6fd8, #6a4190);
+            background: #424245;
+            transform: scale(1.02);
         }
         
         .footer {
-            background: #2c3e50;
-            color: white;
+            background: #f5f5f7;
+            color: #86868b;
             text-align: center;
             padding: 2rem;
             margin-top: 4rem;
+            border-top: 1px solid #e5e5e7;
         }
         
         @media (max-width: 768px) {
@@ -205,7 +224,7 @@
 <body>
     <header class="header">
         <nav class="nav">
-            <div class="logo">Luxe Perfume</div>
+            <div class="logo">PERFUME</div>
             <ul class="nav-links">
                 <li><a href="index.html">홈</a></li>
                 <li><a href="products.html">제품</a></li>
